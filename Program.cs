@@ -1,6 +1,7 @@
 
 
 using HomeLibraryManager.Database;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +11,8 @@ builder.Services.AddRazorPages();
 //ensure database is created and then add to services
 using (var context = new DatabaseContext())
 {
-    context.Database.EnsureCreated();
-    builder.Services.AddScoped<DatabaseContext>();
+    context.Database.Migrate();
+    builder.Services.AddSingleton<DatabaseContext>();
 }
 var app = builder.Build();
 
