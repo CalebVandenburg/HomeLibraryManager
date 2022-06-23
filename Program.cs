@@ -1,6 +1,7 @@
 
 
 using HomeLibraryManager.Database;
+using HomeLibraryManager.GoogleBooks;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ using (var context = new DatabaseContext())
     context.Database.Migrate();
     builder.Services.AddSingleton<DatabaseContext>();
 }
+builder.Services.AddSingleton<GoogleBooksManager>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
