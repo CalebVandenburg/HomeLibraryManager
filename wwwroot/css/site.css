@@ -58,6 +58,7 @@ body {
   font-size: 50px;
   color: green;
   background-color: rgba(100, 100, 100, 0.8);
+  pointer-events: none;
 }
 #booksSearchContainer #bookInfo #rightCard {
   width: 75%;

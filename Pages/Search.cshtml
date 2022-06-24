@@ -3,10 +3,10 @@
 @using HomeLibraryManager.Models
 @{
 }
-<form method="post" id="googleBooksSearchForm" >
-    <input type="text"  asp-for="SearchForm.UserInput"/>
+<form method="post" id="googleBooksSearchForm">
+    <input type="text" asp-for="SearchForm.UserInput" />
     <select asp-for="SearchForm.SearchType">
-        @foreach(var value in Enum.GetValues(typeof(Enums.SearchType)))
+        @foreach (var value in Enum.GetValues(typeof(Enums.SearchType)))
         {
             <option value="@value">@value</option>
         }
@@ -14,20 +14,31 @@
     <button class="btn btn-primary" id="submit" asp-page-handler="Search">Submit</button>
 </form>
 <div id="booksSearchContainer">
-
 </div>
 <script>
-    document.getElementById('googleBooksSearchForm').onsubmit = () => {
-        let formData = new FormData(document.forms[0]);
-        fetch('?handler=Search', {
-            method: 'post',
-            body: new URLSearchParams(formData) 
-        })
-        .then((response) => response.text())
-        .then(data => {
-            console.log(data);
-            document.getElementById('booksSearchContainer').innerHTML = data;
-        });
-        return false;
-    };
+      window.onload = function() {
+          document.getElementById('googleBooksSearchForm').onsubmit = () => {
+              let formData = new FormData(document.forms[0]);
+              fetch('?handler=Search', {
+                  method: 'post',
+                  body: new URLSearchParams(formData)
+              })
+              .then((response) => response.text())
+              .then(data => {
+                  document.getElementById('booksSearchContainer').innerHTML = data;
+              });
+              return false;
+          };
+      }
+      function AddBook() {
+          var bookId = document.getElementById('bookInfo').getAttribute("data-id");
+          console.log(bookId);
+          fetch(`?handler=AddBook&id=${bookId}`, {
+              method: 'post',
+          })
+          .then((response) => response.text())
+          .then(data => {
+              console.log(data);
+          });
+      }
 </script>

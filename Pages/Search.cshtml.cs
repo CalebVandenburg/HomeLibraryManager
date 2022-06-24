@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace HomeLibraryManager.Pages
 {
+    [IgnoreAntiforgeryToken]
     public class SearchModel : PageModel
     {
         private DatabaseContext databaseContext;
@@ -27,6 +28,10 @@ namespace HomeLibraryManager.Pages
             var books = googleBooksManager.GetBookSuggestionsBySearch(SearchForm.UserInput, SearchForm.SearchType).Result;
             var partialData = Partial("Partials/_GoogleBooksList", books);
             return partialData;
+        }
+        public PartialViewResult OnPostAddBookAsync([FromQuery] string id)
+        {
+            return null;
         }
     }
 }
