@@ -7,7 +7,7 @@ namespace HomeLibraryManager.GoogleBooks
     public class GoogleBooksManager
     {
 
-        public async Task<string> GetBookSuggestionsBySearch(string search, SearchType searchType)
+        public async Task<GoogleSearchResult> GetBookSuggestionsBySearch(string search, SearchType searchType)
         {
             var url = "https://www.googleapis.com/books/v1/volumes";
             GoogleSearchResult searchResult = null;
@@ -17,9 +17,14 @@ namespace HomeLibraryManager.GoogleBooks
                 {
                     url = $"{url}?q={search}";
                 }
-                else
+                else if(searchType == SearchType.Title || searchType == SearchType.Author || searchType == SearchType.Publisher)
                 {
                     url = $"{url}?q=in{searchType.ToString().ToLower()}:{search}";
+                }
+                else
+                {
+                    url = $"{url}?q={searchType.ToString().ToLower()}:{search}";
+
                 }
 
                 HttpClient client = new HttpClient();
@@ -33,10 +38,13 @@ namespace HomeLibraryManager.GoogleBooks
                 response.EnsureSuccessStatusCode();
 
                 var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var result = JsonConvert.DeserializeObject<GoogleSearchResult>(responseBody);
-                return responseBody;
+                searchResult = JsonConvert.DeserializeObject<GoogleSearchResult>(responseBody);
+                return searchResult;
             }
-            return "";
+            else
+            {
+                return searchResult;
+            }
 
         }
     }

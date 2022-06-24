@@ -1,0 +1,34 @@
+﻿@model GoogleBooks.GoogleSearchResult
+@{
+}
+@foreach (var book in Model.Items)
+{
+    <div id="bookInfo">
+        <div id="leftCard" style="background-image: url(@book.VolumeInfo.ImageLinks?.Thumbnail?);">
+        </div>
+        <div id="rightCard">
+
+            <h5>@book.VolumeInfo.Title</h5>
+            @if (book.VolumeInfo.Authors != null)
+            {
+
+                <h6>Author(s): @String.Join(", ", book.VolumeInfo.Authors)</h6>
+            }
+            @if (book.VolumeInfo.Publisher != null)
+            {
+
+                <h6>Publisher: @book.VolumeInfo.Publisher</h6>
+            }
+            @if (book.VolumeInfo.IndustryIdentifiers != null && book.VolumeInfo.IndustryIdentifiers.Count() > 0)
+            {
+                <ul>
+                    @foreach (var id in book.VolumeInfo.IndustryIdentifiers)
+                    {
+                        <li><strong>@id.Type:</strong> @id.Identifier</li>
+                    }
+                </ul>
+            }
+            <p id="description">@book.VolumeInfo.Description</p>
+        </div>
+    </div>
+}

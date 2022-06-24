@@ -13,6 +13,9 @@
     </select>
     <button class="btn btn-primary" id="submit" asp-page-handler="Search">Submit</button>
 </form>
+<div id="booksSearchContainer">
+
+</div>
 <script>
     document.getElementById('googleBooksSearchForm').onsubmit = () => {
         let formData = new FormData(document.forms[0]);
@@ -20,9 +23,10 @@
             method: 'post',
             body: new URLSearchParams(formData) 
         })
-        .then((response) => response.json())
+        .then((response) => response.text())
         .then(data => {
             console.log(data);
+            document.getElementById('booksSearchContainer').innerHTML = data;
         });
         return false;
     };

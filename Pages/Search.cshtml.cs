@@ -22,10 +22,11 @@ namespace HomeLibraryManager.Pages
         [BindProperty]
         public GoogleSearchFormModel SearchForm { get; set; }
 
-        public JsonResult OnPostSearchAsync()
+        public PartialViewResult OnPostSearchAsync()
         {
             var books = googleBooksManager.GetBookSuggestionsBySearch(SearchForm.UserInput, SearchForm.SearchType).Result;
-            return new JsonResult(books);
+            var partialData = Partial("Partials/_GoogleBooksList", books);
+            return partialData;
         }
     }
 }
