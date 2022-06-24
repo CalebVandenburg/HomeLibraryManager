@@ -1,0 +1,29 @@
+﻿@page
+@model HomeLibraryManager.Pages.SearchModel
+@using HomeLibraryManager.Models
+@{
+}
+<form method="post" id="googleBooksSearchForm" >
+    <input type="text"  asp-for="SearchForm.UserInput"/>
+    <select asp-for="SearchForm.SearchType">
+        @foreach(var value in Enum.GetValues(typeof(Enums.SearchType)))
+        {
+            <option value="@value">@value</option>
+        }
+    </select>
+    <button class="btn btn-primary" id="submit" asp-page-handler="Search">Submit</button>
+</form>
+<script>
+    document.getElementById('googleBooksSearchForm').onsubmit = () => {
+        let formData = new FormData(document.forms[0]);
+        fetch('?handler=Search', {
+            method: 'post',
+            body: new URLSearchParams(formData) 
+        })
+        .then((response) => response.json())
+        .then(data => {
+            console.log(data);
+        });
+        return false;
+    };
+</script>
