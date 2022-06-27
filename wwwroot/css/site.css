@@ -80,3 +80,7 @@ body {
   border-top-left-radius: 2rem;
   height: 100%;
 }
+
+.libraryListBookThumbnail {
+  width: 20px;
+}

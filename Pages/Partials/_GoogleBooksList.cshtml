@@ -3,7 +3,7 @@
 }
 @foreach (var book in Model.Items)
 {
-    <div id="bookInfo" data-id="@book.ID" onclick="AddBook()">
+    <div id="bookInfo" data-id="@book.ID" onclick="AddBook(`@book.ID`)">
         <div id="leftCard" style="background-image: url(@book.VolumeInfo.ImageLinks?.Thumbnail?);">
         </div>
         <div id="rightCard">

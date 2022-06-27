@@ -19,5 +19,9 @@ namespace HomeLibraryManager.Database
             var numberOfInserts = databaseContext.SaveChanges();
             return numberOfInserts > 0 ? true : false;
         }
+        public IEnumerable<Book> GetBooks()
+        {
+            return databaseContext.Books;
+        }
     }
 }

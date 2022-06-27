@@ -32,8 +32,7 @@
             return false;
         };
     }
-    function AddBook() {        
-        var bookID = document.getElementById('bookInfo').getAttribute("data-id");
+    function AddBook(bookID) {        
         console.log(bookID);
         fetch('?handler=AddBook', {
             method: 'post',

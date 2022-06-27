@@ -1,0 +1,65 @@
+﻿@page
+@model HomeLibraryManager.Pages.LibraryModel
+
+@{
+    ViewData["Title"] = "Library";
+}
+
+<h1>Library</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].ISBN10) - @Html.DisplayNameFor(model => model.Books[0].ISBN13)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Authors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].PublishedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].PageCount)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Books) 
+{
+        <tr>
+            <td>
+                <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN10) - @Html.DisplayFor(modelItem => item.ISBN13)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Authors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageCount)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
