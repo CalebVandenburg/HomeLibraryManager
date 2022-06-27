@@ -14,6 +14,7 @@ using (var context = new DatabaseContext())
 {
     context.Database.Migrate();
     builder.Services.AddSingleton<DatabaseContext>();
+    builder.Services.AddSingleton<BookRepository>();
 }
 builder.Services.AddSingleton<GoogleBooksManager>();
 var app = builder.Build();

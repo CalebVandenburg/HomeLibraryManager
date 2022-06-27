@@ -4,10 +4,10 @@
     {
         public string Kind { get; set; }
         public int TotalItems { get; set; }
-        public List<Item> Items { get; set; }
+        public List<GoogleBookSingleResult> Items { get; set; }
 
     }
-    public class Item
+    public class GoogleBookSingleResult
     {
         public string Kind { get; set; }
         public string ID { get; set; }

@@ -10,11 +10,11 @@ namespace HomeLibraryManager.Pages
     [IgnoreAntiforgeryToken]
     public class SearchModel : PageModel
     {
-        private DatabaseContext databaseContext;
         private GoogleBooksManager googleBooksManager;
-        public SearchModel(DatabaseContext databaseContext, GoogleBooksManager googleBooksManager)
+        private BookRepository bookRepository;
+        public SearchModel(BookRepository bookRepository, GoogleBooksManager googleBooksManager)
         {
-            this.databaseContext = databaseContext;
+            this.bookRepository = bookRepository;
             this.googleBooksManager = googleBooksManager;
         }
         public void OnGet()
@@ -30,9 +30,18 @@ namespace HomeLibraryManager.Pages
             var partialData = Partial("Partials/_GoogleBooksList", books);
             return partialData;
         }
-        public PartialViewResult OnPostAddBookAsync([FromBody] string bookID)
+        public ContentResult OnPostAddBookAsync([FromBody] string bookID)
         {
-            return null;
+            var googleBook = googleBooksManager.GetBookByID(bookID).Result;
+            var added = bookRepository.AddGoogleBookResultToLibrary(googleBook);
+            if(added == true)
+            {
+                return new ContentResult { Content = "Successfully added content", ContentType = "application/json", StatusCode = 200 };
+            }
+            else
+            {
+                return new ContentResult { Content = "Failed to add content", ContentType = "application/json", StatusCode = 100 };
+            }
         }
     }
 }
