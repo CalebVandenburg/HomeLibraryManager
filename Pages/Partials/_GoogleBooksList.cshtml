@@ -3,7 +3,7 @@
 }
 @foreach (var book in Model.Items)
 {
-    <form method='post' id="bookInfo" data-id="@book.ID" onclick="AddBook()">
+    <div id="bookInfo" data-id="@book.ID" onclick="AddBook()">
         <div id="leftCard" style="background-image: url(@book.VolumeInfo.ImageLinks?.Thumbnail?);">
         </div>
         <div id="rightCard">
@@ -30,5 +30,5 @@
             }
             <p id="description">@book.VolumeInfo.Description</p>
         </div>
-    </form>
+    </div>
 }

@@ -3,6 +3,7 @@ using HomeLibraryManager.GoogleBooks;
 using HomeLibraryManager.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace HomeLibraryManager.Pages
 {
@@ -29,7 +30,7 @@ namespace HomeLibraryManager.Pages
             var partialData = Partial("Partials/_GoogleBooksList", books);
             return partialData;
         }
-        public PartialViewResult OnPostAddBookAsync([FromQuery] string id)
+        public PartialViewResult OnPostAddBookAsync([FromBody] string bookID)
         {
             return null;
         }
