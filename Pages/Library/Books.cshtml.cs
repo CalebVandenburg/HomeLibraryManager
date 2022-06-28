@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using HomeLibraryManager.Database;
 using HomeLibraryManager.Models;
 
-namespace HomeLibraryManager.Pages
+namespace HomeLibraryManager.Pages.Library
 {
-    public class LibraryModel : PageModel
+    public class BooksModel : PageModel
     {
         private BookRepository bookRepository;
 
-        public LibraryModel(BookRepository bookRepository)
+        public BooksModel(BookRepository bookRepository)
         {
             this.bookRepository = bookRepository;
         }

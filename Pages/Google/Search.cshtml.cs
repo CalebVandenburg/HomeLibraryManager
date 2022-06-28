@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
 
-namespace HomeLibraryManager.Pages
+namespace HomeLibraryManager.Pages.Google
 {
     [IgnoreAntiforgeryToken]
     public class SearchModel : PageModel

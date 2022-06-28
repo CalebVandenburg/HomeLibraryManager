@@ -7,9 +7,9 @@ namespace HomeLibraryManager.Database
     public class BookRepository
     {
         private DatabaseContext databaseContext;
-        public BookRepository(DatabaseContext databaseContext)
+        public BookRepository()
         {
-            this.databaseContext = databaseContext;
+            databaseContext = new DatabaseContext();
         }
         public bool AddGoogleBookResultToLibrary(GoogleBookSingleResult googleBook)
         {

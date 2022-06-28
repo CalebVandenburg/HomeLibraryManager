@@ -7,13 +7,16 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
+{
+    options.Conventions.AddPageRoute("/Library/Home", "");
+    options.Conventions.AddPageRoute("/Google/Search", "/Search");
+});
 
 //ensure database is created and then add to services
 using (var context = new DatabaseContext())
 {
     context.Database.Migrate();
-    builder.Services.AddSingleton<DatabaseContext>();
     builder.Services.AddSingleton<BookRepository>();
 }
 builder.Services.AddSingleton<GoogleBooksManager>();
