@@ -1,6 +1,7 @@
 ﻿using HomeLibraryManager.GoogleBooks;
 using HomeLibraryManager.Helpers;
 using HomeLibraryManager.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeLibraryManager.Database
 {
@@ -22,6 +23,20 @@ namespace HomeLibraryManager.Database
         public IEnumerable<Book> GetBooks()
         {
             return databaseContext.Books;
+        }
+        public bool EditBook(Book book)
+        {
+            databaseContext.ChangeTracker.Clear();
+            databaseContext.Attach(book).State = EntityState.Modified;
+            try
+            {
+                databaseContext.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
