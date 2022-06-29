@@ -24,19 +24,27 @@ namespace HomeLibraryManager.Database
         {
             return databaseContext.Books;
         }
-        public bool EditBook(Book book)
+        public Book EditBook(BookEditModel bookEdits)
         {
-            databaseContext.ChangeTracker.Clear();
-            databaseContext.Attach(book).State = EntityState.Modified;
-            try
+            var book = GetBooks().Where(x => x.BookId == bookEdits.BookID).FirstOrDefault();
+            if(book != null)
             {
-                databaseContext.SaveChanges();
+                book.EditionNotes = bookEdits.EditionNotes;
+                book.IsFirstEdition = bookEdits.IsFirstEdition == "on" ? true : false;//bookEdits.IsFirstEdition;
+                book.PrintNumber = bookEdits.PrintNumber;
+                databaseContext.ChangeTracker.Clear();
+                databaseContext.Attach(book).State = EntityState.Modified;
+                try
+                {
+                    databaseContext.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return null;
+                }
+                return book;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                return false;
-            }
-            return true;
+            return null;
         }
     }
 }

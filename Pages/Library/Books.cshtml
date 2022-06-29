@@ -10,7 +10,7 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="bookListTable">
     <thead>
         <tr>
             <th></th>
@@ -37,7 +37,7 @@
     <tbody>
 @foreach (var item in Model.Books) 
 {
-        <tr>
+        <tr onclick="location.href='/Library/Book?id=@item.BookId'">
             <td>
                 <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
             </td>

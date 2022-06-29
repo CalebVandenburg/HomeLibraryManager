@@ -39,14 +39,13 @@ namespace HomeLibraryManager.Pages.Library
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostCollectorAsync([FromForm] BookEditModel bookEdits)
         {
-            var bookEdited = bookRepository.EditBook(Book);
-            if(bookEdited)
+            var bookEdited = bookRepository.EditBook(bookEdits);
+            if(bookEdited != null)
             {
-                return Page();
+                //while i could assign the edited book to Book and just return the page it cause url issues if the user refreshes
+                return RedirectToPage("Book", new {id = bookEdits.BookID});
             }
             else
             {

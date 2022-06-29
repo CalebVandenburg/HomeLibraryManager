@@ -36,11 +36,11 @@ namespace HomeLibraryManager.Pages.Google
             var added = bookRepository.AddGoogleBookResultToLibrary(googleBook);
             if(added == true)
             {
-                return new ContentResult { Content = "Successfully added content", ContentType = "application/json", StatusCode = 200 };
+                return new ContentResult { Content = "Successfully added book to library.", ContentType = "application/json", StatusCode = 200 };
             }
             else
             {
-                return new ContentResult { Content = "Failed to add content", ContentType = "application/json", StatusCode = 100 };
+                return new ContentResult { Content = "Failed to add book to library.", ContentType = "application/json", StatusCode = 100 };
             }
         }
     }
