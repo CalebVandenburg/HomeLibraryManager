@@ -5,6 +5,7 @@
 }
 <form method="post" id="googleBooksSearchForm" >
     <input type="text"  asp-for="SearchForm.UserInput"/>
+    <input type="hidden" asp-for="SearchForm.CurrentIndex" />
     <select asp-for="SearchForm.SearchType">
         @foreach(var value in Enum.GetValues(typeof(Enums.SearchType)))
         {
@@ -46,5 +47,21 @@
             console.log(data);
             alert(data);
         });
+    }
+    function LoadMore(currentIndex, button) {  
+        console.log(currentIndex);
+        button.remove();
+        document.getElementById("SearchForm_CurrentIndex").value = currentIndex;
+        let formData = new FormData(document.forms[0]);
+        fetch('?handler=Search', {
+            method: 'post',
+            body: new URLSearchParams(formData) 
+        })
+        .then((response) => response.text())
+        .then(data => {
+            console.log(data);
+            document.getElementById('booksSearchContainer').innerHTML = document.getElementById('booksSearchContainer').innerHTML + data;
+        });
+        return false;
     }
 </script>

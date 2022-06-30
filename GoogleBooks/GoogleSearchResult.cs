@@ -5,6 +5,7 @@
         public string Kind { get; set; }
         public int TotalItems { get; set; }
         public List<GoogleBookSingleResult> Items { get; set; }
+        public int CurrentIndex { get; set; }
 
     }
     public class GoogleBookSingleResult

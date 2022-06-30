@@ -7,7 +7,7 @@ namespace HomeLibraryManager.GoogleBooks
     public class GoogleBooksManager
     {
 
-        public async Task<GoogleSearchResult> GetBookSuggestionsBySearch(string search, SearchType searchType)
+        public async Task<GoogleSearchResult> GetBookSuggestionsBySearch(string search, SearchType searchType, int index = 0)
         {
             var url = "https://www.googleapis.com/books/v1/volumes";
             GoogleSearchResult searchResult = null;
@@ -26,7 +26,7 @@ namespace HomeLibraryManager.GoogleBooks
                     url = $"{url}?q={searchType.ToString().ToLower()}:{search}";
 
                 }
-
+                url = $"{url}&maxResults=40&startIndex={index}";
                 HttpClient client = new HttpClient();
                 var request = new HttpRequestMessage
                 {
@@ -39,6 +39,7 @@ namespace HomeLibraryManager.GoogleBooks
 
                 var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 searchResult = JsonConvert.DeserializeObject<GoogleSearchResult>(responseBody);
+                searchResult.CurrentIndex = index + 40;
                 return searchResult;
             }
             else

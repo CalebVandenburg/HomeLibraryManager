@@ -26,7 +26,7 @@ namespace HomeLibraryManager.Pages.Google
 
         public PartialViewResult OnPostSearchAsync()
         {
-            var books = googleBooksManager.GetBookSuggestionsBySearch(SearchForm.UserInput, SearchForm.SearchType).Result;
+            var books = googleBooksManager.GetBookSuggestionsBySearch(SearchForm.UserInput, SearchForm.SearchType, SearchForm.CurrentIndex).Result;
             var partialData = Partial("Partials/_GoogleBooksList", books);
             return partialData;
         }

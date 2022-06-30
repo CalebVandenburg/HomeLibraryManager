@@ -6,5 +6,6 @@ namespace HomeLibraryManager.GoogleBooks
     {
         public string UserInput { get; set; } = "";
         public SearchType SearchType { get; set; } = SearchType.Keyword;
+        public int CurrentIndex { get; set; } = 0;
     }
 }
