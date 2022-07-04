@@ -13,7 +13,7 @@
 <table class="table" id="bookListTable">
     <thead>
         <tr>
-            <th><input id="selectAllCheckbox" type="checkbox"></th>
+            <th><input id="selectAllCheckbox" onchange="ToggleSelected(this)" type="checkbox"></th>
             <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Books[0].Title)
@@ -39,7 +39,7 @@
         @foreach (var item in Model.Books)
         {
             <tr>
-                <td><input class="singleCheckbox" type="checkbox" data-bookid="@item.BookId"></td>
+                <td><input class="singleCheckbox" onchange="ToggleSelectAll()"  type="checkbox" data-bookid="@item.BookId"></td>
                 <td>
                     <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
                 </td>
@@ -66,6 +66,31 @@
     </tbody>
 </table>
 <script>
+     function ToggleSelected(checkbox) {
+
+         var checkedBooks = document.getElementsByClassName('singleCheckbox');
+
+         for (let item of checkedBooks) {
+            if(checkbox.checked) {
+                item.checked = true;
+            }
+            else {
+                item.checked = false;
+            }
+        }
+     }
+     function ToggleSelectAll() {
+         var newSelectState = true;
+         var checkedBooks = document.getElementsByClassName('singleCheckbox');
+
+         for (let item of checkedBooks) {
+            if(!item.checked) {
+                newSelectState = false;
+                break;
+            }
+        }
+        document.getElementById("selectAllCheckbox").checked = newSelectState;
+     }
      function DeleteSelected() {
         var checkedBooks = document.getElementsByClassName('singleCheckbox');
         console.log(checkedBooks);
