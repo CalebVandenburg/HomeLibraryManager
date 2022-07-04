@@ -46,5 +46,30 @@ namespace HomeLibraryManager.Database
             }
             return null;
         }
+        public bool DeleteBook(int bookID)
+        {
+            var book = GetBooks().Where(x => x.BookId == bookID).FirstOrDefault();
+            if(book != null)
+            {
+                databaseContext.ChangeTracker.Clear();
+                databaseContext.Attach(book).State = EntityState.Deleted;
+                databaseContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool DeleteBooks(List<int> bookIDs)
+        {
+            var books = GetBooks().Where(x => bookIDs.Contains(x.BookId));
+            
+            if (books != null && books.Count() > 0)
+            {
+                databaseContext.ChangeTracker.Clear();
+                databaseContext.Attach(books).State = EntityState.Deleted;
+                databaseContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

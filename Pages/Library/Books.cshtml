@@ -8,11 +8,12 @@
 <h1>Library</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Create New</a><input type="button" onclick="DeleteSelected()" value="Delete Selected" id="deleteSelectedButton"/>
 </p>
 <table class="table" id="bookListTable">
     <thead>
         <tr>
+            <th><input id="selectAllCheckbox" type="checkbox"></th>
             <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Books[0].Title)
@@ -37,11 +38,12 @@
     <tbody>
 @foreach (var item in Model.Books) 
 {
-        <tr onclick="location.href='/Library/Book?id=@item.BookId'">
+        <tr>
+            <td><input class="singleCheckbox" type="checkbox" data-bookid="@item.BookId"></td>
             <td>
                 <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
             </td>
-            <td>
+            <td onclick="location.href='/Library/Book?id=@item.BookId'">
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
@@ -63,3 +65,30 @@
 }
     </tbody>
 </table>
+<script>
+     function DeleteSelected() {  
+        var checkedBooks = document.getElementsByClassName('singleCheckbox');
+        console.log(checkedBooks);
+        var itemsToDelete = {};
+        for (let item of checkedBooks) {
+            console.log(item);
+            if(item.checked) {
+                
+            }
+        }
+        console.log(itemsToDelete);
+        fetch('/Library/Books?handler=Delete', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: "{1,2,3}"
+        })
+        .then((response) => response.text())
+        .then(data => {
+            console.log(data);
+            alert(data);
+        });
+        return false;
+    }
+</script>

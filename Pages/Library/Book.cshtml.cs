@@ -49,7 +49,20 @@ namespace HomeLibraryManager.Pages.Library
             }
             else
             {
-                return RedirectToPage("./Error");
+                return RedirectToPage("/Error");
+            }
+        }
+        public async Task<IActionResult> OnPostDeleteAsync([FromForm] BookEditModel bookEdits)
+        {
+            bool bookEdited = bookRepository.DeleteBook(bookEdits.BookID);
+            if (bookEdited)
+            {
+                //while i could assign the edited book to Book and just return the page it cause url issues if the user refreshes
+                return RedirectToPage("/Library/Books");
+            }
+            else
+            {
+                return RedirectToPage("/Error");
             }
         }
     }

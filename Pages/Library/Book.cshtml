@@ -45,6 +45,7 @@
                 <span><label for="IsFirstEdition" >First Edition </label><input type="checkbox" class="" id="IsFirstEdition" name="IsFirstEdition" @if(Model.Book.IsFirstEdition != null && (bool)Model.Book.IsFirstEdition){@Html.Raw("checked");} /></span>
                 <span><label for="EditionNotes">Edition Notes</label><textarea class="form-control" id="EditionNotes" name="EditionNotes">@Model.Book.EditionNotes</textarea></span>
                 <span><input asp-page-handler="Collector" type="submit" value="Save" class="btn btn-primary" name="" /></span>
+                <span><input asp-page-handler="Delete" type="submit" value="Delete" class="btn btn-primary" name="" /></span>
             </fieldset>
         </form>
     </div>

@@ -29,5 +29,18 @@ namespace HomeLibraryManager.Pages.Library
                 Books = books;
             }
         }
+        public async Task<IActionResult> OnPostDeleteAsync([FromBody] int[] bookID)
+        {
+            bool bookEdited = true;// bookRepository.DeleteBooks(bookID.ToList());
+            if (bookEdited)
+            {
+                //while i could assign the edited book to Book and just return the page it cause url issues if the user refreshes
+                return RedirectToPage("/Library/Books");
+            }
+            else
+            {
+                return RedirectToPage("/Error");
+            }
+        }
     }
 }
