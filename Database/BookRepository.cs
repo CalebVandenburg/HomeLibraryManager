@@ -60,12 +60,12 @@ namespace HomeLibraryManager.Database
         }
         public bool DeleteBooks(List<int> bookIDs)
         {
-            var books = GetBooks().Where(x => bookIDs.Contains(x.BookId));
+            var books = GetBooks().Where(x => bookIDs.Contains(x.BookId)).ToList();
             
             if (books != null && books.Count() > 0)
             {
                 databaseContext.ChangeTracker.Clear();
-                databaseContext.Attach(books).State = EntityState.Deleted;
+                databaseContext.RemoveRange(books);
                 databaseContext.SaveChanges();
                 return true;
             }

@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page
 @model HomeLibraryManager.Pages.Library.BooksModel
 
 @{
@@ -8,7 +8,7 @@
 <h1>Library</h1>
 
 <p>
-    <a asp-page="Create">Create New</a><input type="button" onclick="DeleteSelected()" value="Delete Selected" id="deleteSelectedButton"/>
+    <a asp-page="Create">Create New</a><input type="button" onclick="DeleteSelected()" value="Delete Selected" id="deleteSelectedButton" />
 </p>
 <table class="table" id="bookListTable">
     <thead>
@@ -36,44 +36,45 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Books) 
-{
-        <tr>
-            <td><input class="singleCheckbox" type="checkbox" data-bookid="@item.BookId"></td>
-            <td>
-                <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
-            </td>
-            <td onclick="location.href='/Library/Book?id=@item.BookId'">
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Publisher)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ISBN10) - @Html.DisplayFor(modelItem => item.ISBN13)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Authors)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublishedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PageCount)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Books)
+        {
+            <tr>
+                <td><input class="singleCheckbox" type="checkbox" data-bookid="@item.BookId"></td>
+                <td>
+                    <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
+                </td>
+                <td onclick="location.href='/Library/Book?id=@item.BookId'">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Publisher)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ISBN10) - @Html.DisplayFor(modelItem => item.ISBN13)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Authors)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PageCount)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 <script>
-     function DeleteSelected() {  
+     function DeleteSelected() {
         var checkedBooks = document.getElementsByClassName('singleCheckbox');
         console.log(checkedBooks);
-        var itemsToDelete = {};
+        var itemsToDelete = [];
         for (let item of checkedBooks) {
             console.log(item);
             if(item.checked) {
-                
+
+                itemsToDelete.push(parseInt(item.getAttribute("data-bookid")));
             }
         }
         console.log(itemsToDelete);
@@ -82,13 +83,22 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: "{1,2,3}"
+            body: JSON.stringify(itemsToDelete)
         })
-        .then((response) => response.text())
-        .then(data => {
-            console.log(data);
-            alert(data);
-        });
+        .then((response) =>  {
+            console.log(response);
+            if(response.status == 200) {
+                location.reload(true);
+            }
+            else {
+                return response.text();
+            }
+        })
+         .then(text => {
+             if(text != undefined && text != null) {
+                alert(text);
+             }
+          })
         return false;
     }
 </script>

@@ -10,6 +10,7 @@ using HomeLibraryManager.Models;
 
 namespace HomeLibraryManager.Pages.Library
 {
+    [IgnoreAntiforgeryToken]
     public class BooksModel : PageModel
     {
         private BookRepository bookRepository;
@@ -29,17 +30,17 @@ namespace HomeLibraryManager.Pages.Library
                 Books = books;
             }
         }
-        public async Task<IActionResult> OnPostDeleteAsync([FromBody] int[] bookID)
+        public async Task<ContentResult> OnPostDeleteAsync([FromBody] int[] bookIDs)
         {
-            bool bookEdited = true;// bookRepository.DeleteBooks(bookID.ToList());
+            bool bookEdited = bookRepository.DeleteBooks(bookIDs.ToList());
             if (bookEdited)
             {
                 //while i could assign the edited book to Book and just return the page it cause url issues if the user refreshes
-                return RedirectToPage("/Library/Books");
+                return new ContentResult { Content = "Deleted Books.", StatusCode = 200, ContentType = "application/json" };
             }
             else
             {
-                return RedirectToPage("/Error");
+                return new ContentResult { Content = "Failed to delete.", StatusCode = 210, ContentType = "application/json" };
             }
         }
     }
