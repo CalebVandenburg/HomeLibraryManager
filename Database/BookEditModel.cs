@@ -1,4 +1,4 @@
-﻿namespace HomeLibraryManager.Models
+﻿namespace HomeLibraryManager.Database
 {
     public class BookEditModel
     {

@@ -36,7 +36,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Books)
+        @if(Model.Books != null && Model.Books.Count() > 0)
+        {
+            @foreach (var item in Model.Books)
         {
             <tr>
                 <td><input class="singleCheckbox" onchange="ToggleSelectAll()"  type="checkbox" data-bookid="@item.BookId"></td>
@@ -63,6 +65,8 @@
                 </td>
             </tr>
         }
+        }
+        
     </tbody>
 </table>
 <script>

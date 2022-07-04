@@ -49,7 +49,7 @@ namespace HomeLibraryManager.Pages.Library
             }
             else
             {
-                return RedirectToPage("/Error");
+                return RedirectToPage("Error");
             }
         }
         public async Task<IActionResult> OnPostDeleteAsync([FromForm] BookEditModel bookEdits)

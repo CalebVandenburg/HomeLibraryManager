@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HomeLibraryManager.Models
+namespace HomeLibraryManager.Database
 {
     
     public class Book
@@ -24,5 +24,6 @@ namespace HomeLibraryManager.Models
         public string? Small { get; set; }
         public string? Medium { get; set; }
         public string? Large { get; set; }
+        public List<Review>? Reviews { get; set; }
     }
 }
