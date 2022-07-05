@@ -1,0 +1,30 @@
+﻿@page
+@model HomeLibraryManager.Pages.Reviews.WriteReviewModel
+
+@{
+    ViewData["Title"] = "WriteReview";
+}
+
+<h1>WriteReview</h1>
+
+<h4>Review</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" name="Book.BookId" value="@Model.Review.Book.BookId" id="BookId">
+            <span><label for="Title">Title</label><input value="@Model.Review.Title" class="form-control" id="Title" name="Title" /></span>
+            <span><label for="Score">Score</label><input value="@Model.Review.Score" class="form-control" id="Score" name="Score" /></span>
+            <span><label for="Text">Text</label><textarea value="@Model.Review.Text" class="form-control" id="Text" name="Text">@Model.Review.Text</textarea> </span>
+            <span><input asp-page-handler="Review" type="submit" value="Create" class="btn btn-success" name="" /></span>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
