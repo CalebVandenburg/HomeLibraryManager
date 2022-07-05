@@ -20,8 +20,8 @@
             @foreach (var item in Model.Reviews)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Book.Title)
+                    <td  onclick="location.href='/Library/Book?id=@item.Book.BookId'">
+                        <u>@Html.DisplayFor(modelItem => item.Book.Title)</u>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
