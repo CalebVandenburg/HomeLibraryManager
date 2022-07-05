@@ -24,6 +24,10 @@ namespace HomeLibraryManager.Database
         {
             return databaseContext.Books;
         }
+        public IEnumerable<Review> GetReviews()
+        {
+            return databaseContext.Reviews.Include(x=>x.Book);
+        }
         public Book EditBook(BookEditModel bookEdits)
         {
             var book = GetBooks().Where(x => x.BookId == bookEdits.BookID).FirstOrDefault();

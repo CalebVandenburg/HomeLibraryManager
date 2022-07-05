@@ -126,7 +126,7 @@ body {
   width: 150px;
 }
 
-#bookListTable tbody tr:hover {
+#bookListTable tbody tr td:nth-child(3):hover {
   cursor: pointer;
 }
 
