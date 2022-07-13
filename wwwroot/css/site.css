@@ -86,52 +86,54 @@ body {
   width: 20px;
 }
 
-#bookDetailContainer {
+#bookDetailContainer, #reviewDetailContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-top: 2rem;
 }
-#bookDetailContainer #left {
+#bookDetailContainer #left, #reviewDetailContainer #left {
   width: 23%;
 }
-#bookDetailContainer #left img {
+#bookDetailContainer #left img, #reviewDetailContainer #left img {
   width: 100%;
 }
-#bookDetailContainer #right {
+#bookDetailContainer #right, #reviewDetailContainer #right {
   width: 72%;
   display: flex;
   flex-direction: column;
 }
-#bookDetailContainer #right #googleProperties {
+#bookDetailContainer #right #googleProperties, #reviewDetailContainer #right #googleProperties {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-#bookDetailContainer #right #googleProperties span {
+#bookDetailContainer #right #googleProperties span, #reviewDetailContainer #right #googleProperties span {
   width: 45%;
   padding-top: 1rem;
   font-weight: bold;
 }
-#bookDetailContainer #right fieldset {
+#bookDetailContainer #right fieldset, #reviewDetailContainer #right fieldset {
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
 }
-#bookDetailContainer #right fieldset span {
+#bookDetailContainer #right fieldset span, #reviewDetailContainer #right fieldset span {
   padding-top: 1rem;
   font-weight: bold;
 }
-#bookDetailContainer #right fieldset input {
+#bookDetailContainer #right fieldset input, #reviewDetailContainer #right fieldset input {
   width: 150px;
-}
-
-#bookListTable tbody tr td:nth-child(3):hover {
-  cursor: pointer;
 }
 
 body {
   padding-top: 65px;
+}
+
+td.linkingTD:hover {
+  cursor: pointer;
+  background-color: lightgray;
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 768px) {

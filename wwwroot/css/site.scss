@@ -95,7 +95,7 @@ body {
     width: 20px;
 }
 
-#bookDetailContainer {
+#bookDetailContainer, #reviewDetailContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -142,15 +142,14 @@ body {
         }
     }
 }
-#bookListTable {
-    tbody tr td:nth-child(3):hover {
-        cursor: pointer;
-    }
-}
 body {
     padding-top: 65px;
 }
-
+td.linkingTD:hover {
+    cursor : pointer;
+    background-color: lightgray;
+    text-decoration: underline;
+}
 @media screen and (max-width: 768px) {
     body {
         padding-top: 0px;

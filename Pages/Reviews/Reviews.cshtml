@@ -15,15 +15,15 @@
         </tr>
     </thead>
     <tbody>
-        @if(Model.Reviews != null && Model.Reviews.Count() > 0)
+        @if (Model.Reviews != null && Model.Reviews.Count() > 0)
         {
             @foreach (var item in Model.Reviews)
             {
                 <tr>
-                    <td  onclick="location.href='/Library/Book?id=@item.Book.BookId'">
-                        <u>@Html.DisplayFor(modelItem => item.Book.Title)</u>
+                    <td class="linkingTD" onclick="location.href='/Library/Book?id=@item.Book.BookId'">
+                        @Html.DisplayFor(modelItem => item.Book.Title)
                     </td>
-                    <td>
+                    <td class="linkingTD" onclick="location.href='/Reviews/Review?id=@item.ReviewId'">
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
@@ -32,6 +32,6 @@
                 </tr>
             }
         }
-        
+
     </tbody>
 </table>

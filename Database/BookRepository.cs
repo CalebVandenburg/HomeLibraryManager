@@ -12,6 +12,7 @@ namespace HomeLibraryManager.Database
         {
             databaseContext = new DatabaseContext();
         }
+        #region Books
         public bool AddGoogleBookResultToLibrary(GoogleBookSingleResult googleBook)
         {
             GoogleToLibrary googleToLibraryHelper = new GoogleToLibrary();
@@ -23,10 +24,6 @@ namespace HomeLibraryManager.Database
         public IEnumerable<Book> GetBooks()
         {
             return databaseContext.Books;
-        }
-        public IEnumerable<Review> GetReviews()
-        {
-            return databaseContext.Reviews.Include(x => x.Book);
         }
         public Book EditBook(BookEditModel bookEdits)
         {
@@ -75,6 +72,12 @@ namespace HomeLibraryManager.Database
             }
             return false;
         }
+        #endregion
+        #region Reviews
+        public IEnumerable<Review> GetReviews()
+        {
+            return databaseContext.Reviews.Include(x => x.Book);
+        }
         public bool CreateReview(Review review)
         {
             var book = GetBooks().Where(x => x.BookId == review.Book.BookId).FirstOrDefault();
@@ -89,5 +92,43 @@ namespace HomeLibraryManager.Database
             }
             return false;
         }
+        public Review EditReview(ReviewEditModel reviewEdits)
+        {
+            var review = GetReviews().Where(x => x.ReviewId == reviewEdits.ReviewId).FirstOrDefault();
+            if (review != null)
+            {
+                review.Title = reviewEdits.Title;
+                review.Text = reviewEdits.Text;
+                review.Score = reviewEdits.Score;
+                databaseContext.ChangeTracker.Clear();
+                databaseContext.Attach(review).State = EntityState.Modified;
+                try
+                {
+                    databaseContext.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return null;
+                }
+                return review;
+            }
+            return null;
+        }
+        public bool DeleteReview(int reviewId)
+        {
+            var review = GetReviews().Where(x => x.ReviewId == reviewId).FirstOrDefault();
+            if (review != null)
+            {
+                databaseContext.ChangeTracker.Clear();
+                databaseContext.Attach(review).State = EntityState.Deleted;
+                databaseContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+
+
     }
 }

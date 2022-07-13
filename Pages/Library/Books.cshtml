@@ -45,8 +45,8 @@
                 <td>
                     <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
                 </td>
-                <td onclick="location.href='/Library/Book?id=@item.BookId'">
-                    <u>@Html.DisplayFor(modelItem => item.Title)</u>
+                <td  class="linkingTD" onclick="location.href='/Library/Book?id=@item.BookId'">
+                    @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Publisher)
