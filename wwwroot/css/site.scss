@@ -1,22 +1,8 @@
-﻿html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
+﻿@media (min-width: 768px) {
     html {
         font-size: 16px;
     }
 }
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-}
-
 #booksSearchContainer {
     display: flex;
     flex-wrap: wrap;
@@ -36,6 +22,7 @@ body {
         align-items: center;
         justify-content: center;
         position: relative;
+        background-color: rgba(128,128,128, 0.3);
 
         #addOverlay {
             display: none;
@@ -94,18 +81,58 @@ body {
 .libraryListBookThumbnail {
     width: 20px;
 }
+table {
+    //override bootstrap
+    border-color: rgb(95,99,104) !important;
 
+    thead {
+        tr {
+            background-color: grey;
+        }
+    }
+
+    tbody {
+        tr {
+            &:nth-child(even) {
+                background-color: grey;
+
+                .linkingTD:hover {
+                    background-color: lightgrey;
+                }
+            }
+
+            &:nth-child(odd) {
+                background-color: lightgrey;
+
+                .linkingTD:hover {
+                    background-color: grey;
+                }
+            }
+        }
+    }
+}
 #bookDetailContainer, #reviewDetailContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding-top: 2rem;
 
+    #description {
+        margin-top: 3rem;
+    }
+
     #left {
         width: 23%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
 
         img {
             width: 100%;
+        }
+        h1 {
+            margin-bottom: 0px
         }
     }
 
@@ -142,9 +169,6 @@ body {
         }
     }
 }
-body {
-    padding-top: 65px;
-}
 td.linkingTD:hover {
     cursor : pointer;
     background-color: lightgray;
@@ -155,3 +179,78 @@ td.linkingTD:hover {
         padding-top: 0px;
     }
 }
+/*#region Global Styles and Nav Styles*/
+html {
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
+    //background-color: rgb(95,99,104);
+    color: lightgrey;
+    background: linear-gradient(0deg, rgba(95,99,104, 0.98), rgba(95,99,104, 0.98)), url("../images/bookshelfbackground.jpg");
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+
+    body {
+        padding-top: 65px;
+        margin-bottom: 60px;
+        //background-color: rgb(95,99,104);
+        background: none;
+
+        header {
+            nav {
+                .dropdown-menu {
+                    background-color: grey;
+
+                    a.dropdown-item {
+                        color: rgb(235,235,235);
+                        background-color: grey;
+                        border-color: lightgray;
+
+                        &:not(:first-of-type) {
+                            border-top: 1px solid lightgrey;
+                        }
+                    }
+                }
+            }
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span, button, input.btn, header nav.navbar a, p a, li {
+            color: rgb(235,235,235);
+        }
+
+        input.btn, a.btn {
+            &.btn-danger {
+                background-color: rgb(200,70,70);
+                border-color: rgb(200,70,70);
+            }
+
+            &.btn-primary {
+                background-color: rgb(50,50,190);
+                border-color: rgb(50,50,190);
+            }
+
+            &.btn-success {
+                background-color: rgb(70,170,70);
+                border-color: rgb(70,170,70);
+            }
+        }
+
+        input[type="text"], input.form-control, textarea.form-control, select {
+            background-color: lightgrey;
+        }
+
+        input[type="checkbox"] {
+            accent-color: lightgrey;
+        }
+
+        footer.footer {
+            border-color: lightgray;
+
+            .container {
+                text-align: center;
+                color: lightgrey;
+            }
+        }
+    }
+}
+/*#endregion*/

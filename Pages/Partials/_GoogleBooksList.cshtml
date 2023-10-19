@@ -1,41 +1,47 @@
 ﻿@model GoogleBooks.GoogleSearchResult
 @{
 }
-@foreach (var book in Model.Items)
+@if (Model.Items?.Count() > 0)
 {
+    @foreach (var book in Model.Items)
+    {
         <div id="bookInfo" data-id="@book.ID" onclick="AddBook(`@book.ID`)">
             <div id="addOverlay">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-      <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"></path>
-    </svg>
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"></path>
+                </svg>
             </div>
             <div id="leftCard" style="background-image: url(@book.VolumeInfo.ImageLinks?.Thumbnail?);">
             </div>
             <div id="rightCard">
 
                 <h5>@book.VolumeInfo.Title</h5>
-            @if (book.VolumeInfo.Authors != null)
-            {
+                @if (book.VolumeInfo.Authors != null)
+                {
 
-                        <h6>Author(s): @String.Join(", ", book.VolumeInfo.Authors)</h6>
-            }
-            @if (book.VolumeInfo.Publisher != null)
-            {
+                    <h6>Author(s): @String.Join(", ", book.VolumeInfo.Authors)</h6>
+                }
+                @if (book.VolumeInfo.Publisher != null)
+                {
 
-                        <h6>Publisher: @book.VolumeInfo.Publisher</h6>
-            }
-            @if (book.VolumeInfo.IndustryIdentifiers != null && book.VolumeInfo.IndustryIdentifiers.Count() > 0)
-            {
-                        <ul>
-                    @foreach (var id in book.VolumeInfo.IndustryIdentifiers)
-                    {
-                                    <li><strong>@id.Type:</strong> @id.Identifier</li>
-                    }
-                        </ul>
-            }
+                    <h6>Publisher: @book.VolumeInfo.Publisher</h6>
+                }
+                @if (book.VolumeInfo.IndustryIdentifiers != null && book.VolumeInfo.IndustryIdentifiers.Count() > 0)
+                {
+                    <ul>
+                        @foreach (var id in book.VolumeInfo.IndustryIdentifiers)
+                        {
+                            <li><strong>@id.Type:</strong> @id.Identifier</li>
+                        }
+                    </ul>
+                }
                 <p id="description">@book.VolumeInfo.Description</p>
             </div>
         </div>
+    }
+    <input type="button" value="Load More" id="loadMoreButton" onclick="LoadMore(`@Model.CurrentIndex`, this)">
 }
-
-<input type="button" value="Load More" id="loadMoreButton" onclick="LoadMore(`@Model.CurrentIndex`, this)">
+else
+{
+    <h4>Sorry, no books found on Google Books with your search.</h4>
+}

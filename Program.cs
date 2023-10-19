@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
 {
     options.Conventions.AddPageRoute("/Library/Home", "");
+    options.Conventions.AddPageRoute("/Library/Books", "/Books");
     options.Conventions.AddPageRoute("/Google/Search", "/Search");
     options.Conventions.AddPageRoute("/Reviews/Reviews", "/Reviews");
 });

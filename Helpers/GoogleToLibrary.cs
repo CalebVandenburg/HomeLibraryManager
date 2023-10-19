@@ -22,8 +22,8 @@ namespace HomeLibraryManager.Helpers
                 Small = googleBook.VolumeInfo.ImageLinks.Small,
                 Large = googleBook.VolumeInfo.ImageLinks.Large,
                 Medium = googleBook.VolumeInfo.ImageLinks.Medium,
-                ISBN10 = googleBook.VolumeInfo.IndustryIdentifiers.Where(x => x.Type == "ISBN_10").FirstOrDefault().Identifier,
-                ISBN13 = googleBook.VolumeInfo.IndustryIdentifiers.Where(x => x.Type == "ISBN_13").FirstOrDefault().Identifier,
+                ISBN10 = googleBook.VolumeInfo.IndustryIdentifiers.Where(x => x.Type == "ISBN_10").FirstOrDefault()?.Identifier,
+                ISBN13 = googleBook.VolumeInfo.IndustryIdentifiers.Where(x => x.Type == "ISBN_13").FirstOrDefault()?.Identifier,
             };
             return libraryBook;
         }

@@ -83,8 +83,8 @@ namespace HomeLibraryManager.Database
             var book = GetBooks().Where(x => x.BookId == review.Book.BookId).FirstOrDefault();
             if (book != null)
             {
-                review.Book = book;
                 databaseContext.ChangeTracker.Clear();
+                review.Book = book;
                 databaseContext.Attach(book);
                 databaseContext.Add(review);
                 databaseContext.SaveChanges();

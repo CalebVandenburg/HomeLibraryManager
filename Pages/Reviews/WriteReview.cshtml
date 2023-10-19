@@ -13,9 +13,9 @@
     <div class="col-md-4">
         <form method="post">
             <input type="hidden" name="Book.BookId" value="@Model.Review.Book.BookId" id="BookId">
-            <span><label for="Title">Title</label><input value="@Model.Review.Title" class="form-control" id="Title" name="Title" /></span>
-            <span><label for="Score">Score</label><input value="@Model.Review.Score" class="form-control" id="Score" name="Score" /></span>
-            <span><label for="Text">Text</label><textarea value="@Model.Review.Text" class="form-control" id="Text" name="Text">@Model.Review.Text</textarea> </span>
+            <span><label for="Title">Title</label><input value="@Model.Review.Title" class="form-control" id="Title" name="Title" required="required" /></span>
+            <span><label for="Score">Score</label><input type="number" max="10" min="0" value="@Model.Review.Score" class="form-control" id="Score" name="Score" required="required" /></span>
+            <span><label for="Text">Text</label><textarea value="@Model.Review.Text" class="form-control" id="Text" name="Text" required="required">@Model.Review.Text</textarea> </span>
             <span><input asp-page-handler="Review" type="submit" value="Create" class="btn btn-success" name="" /></span>
         </form>
     </div>

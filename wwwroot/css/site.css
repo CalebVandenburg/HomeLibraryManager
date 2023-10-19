@@ -1,21 +1,8 @@
-﻿html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
+﻿@media (min-width: 768px) {
   html {
     font-size: 16px;
   }
 }
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
 #booksSearchContainer {
   display: flex;
   flex-wrap: wrap;
@@ -35,6 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  background-color: rgba(128, 128, 128, 0.3);
 }
 #booksSearchContainer #bookInfo #addOverlay {
   display: none;
@@ -86,17 +74,46 @@ body {
   width: 20px;
 }
 
+table {
+  border-color: rgb(95, 99, 104) !important;
+}
+table thead tr {
+  background-color: grey;
+}
+table tbody tr:nth-child(even) {
+  background-color: grey;
+}
+table tbody tr:nth-child(even) .linkingTD:hover {
+  background-color: lightgrey;
+}
+table tbody tr:nth-child(odd) {
+  background-color: lightgrey;
+}
+table tbody tr:nth-child(odd) .linkingTD:hover {
+  background-color: grey;
+}
+
 #bookDetailContainer, #reviewDetailContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-top: 2rem;
 }
+#bookDetailContainer #description, #reviewDetailContainer #description {
+  margin-top: 3rem;
+}
 #bookDetailContainer #left, #reviewDetailContainer #left {
   width: 23%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 #bookDetailContainer #left img, #reviewDetailContainer #left img {
   width: 100%;
+}
+#bookDetailContainer #left h1, #reviewDetailContainer #left h1 {
+  margin-bottom: 0px;
 }
 #bookDetailContainer #right, #reviewDetailContainer #right {
   width: 72%;
@@ -126,10 +143,6 @@ body {
   width: 150px;
 }
 
-body {
-  padding-top: 65px;
-}
-
 td.linkingTD:hover {
   cursor: pointer;
   background-color: lightgray;
@@ -141,3 +154,59 @@ td.linkingTD:hover {
     padding-top: 0px;
   }
 }
+/*#region Global Styles and Nav Styles*/
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 14px;
+  color: lightgrey;
+  background: linear-gradient(0deg, rgba(95, 99, 104, 0.98), rgba(95, 99, 104, 0.98)), url("../images/bookshelfbackground.jpg");
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+}
+html body {
+  padding-top: 65px;
+  margin-bottom: 60px;
+  background: none;
+}
+html body header nav .dropdown-menu {
+  background-color: grey;
+}
+html body header nav .dropdown-menu a.dropdown-item {
+  color: rgb(235, 235, 235);
+  background-color: grey;
+  border-color: lightgray;
+}
+html body header nav .dropdown-menu a.dropdown-item:not(:first-of-type) {
+  border-top: 1px solid lightgrey;
+}
+html body h1, html body h2, html body h3, html body h4, html body h5, html body h6, html body p, html body span, html body button, html body input.btn, html body header nav.navbar a, html body p a, html body li {
+  color: rgb(235, 235, 235);
+}
+html body input.btn.btn-danger, html body a.btn.btn-danger {
+  background-color: rgb(200, 70, 70);
+  border-color: rgb(200, 70, 70);
+}
+html body input.btn.btn-primary, html body a.btn.btn-primary {
+  background-color: rgb(50, 50, 190);
+  border-color: rgb(50, 50, 190);
+}
+html body input.btn.btn-success, html body a.btn.btn-success {
+  background-color: rgb(70, 170, 70);
+  border-color: rgb(70, 170, 70);
+}
+html body input[type=text], html body input.form-control, html body textarea.form-control, html body select {
+  background-color: lightgrey;
+}
+html body input[type=checkbox] {
+  accent-color: lightgrey;
+}
+html body footer.footer {
+  border-color: lightgray;
+}
+html body footer.footer .container {
+  text-align: center;
+  color: lightgrey;
+}
+
+/*#endregion*/
