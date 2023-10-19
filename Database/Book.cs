@@ -8,7 +8,7 @@ namespace HomeLibraryManager.Database
         [Key]
         public int BookId { get; set; }
         public string? GoogleBookId { get; set; }
-        public string Title { get; set; }
+        public string? Title { get; set; }
         public string? Publisher { get; set; }
         public string? PrintNumber { get; set; }
         public string? EditionNotes { get; set; }
@@ -24,6 +24,7 @@ namespace HomeLibraryManager.Database
         public string? Small { get; set; }
         public string? Medium { get; set; }
         public string? Large { get; set; }
-        public List<Review>? Reviews { get; set; }
+        public List<Review> Reviews { get; set; }
+        public User User { get; set; }
     }
 }

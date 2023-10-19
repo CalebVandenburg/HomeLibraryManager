@@ -1,5 +1,7 @@
 ﻿using System.Net;
+using System.Net.NetworkInformation;
 using static HomeLibraryManager.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace HomeLibraryManager.GoogleBooks

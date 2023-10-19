@@ -2,6 +2,7 @@
 using HomeLibraryManager.Helpers;
 using HomeLibraryManager.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Web.Providers.Entities;
 
 namespace HomeLibraryManager.Database
 {
@@ -13,11 +14,14 @@ namespace HomeLibraryManager.Database
             databaseContext = new DatabaseContext();
         }
         #region Books
-        public bool AddGoogleBookResultToLibrary(GoogleBookSingleResult googleBook)
+        public bool AddGoogleBookResultToLibrary(GoogleBookSingleResult googleBook, int userId)
         {
+            User user = GetUsers().Where(x => x.UserId == userId).FirstOrDefault();
             GoogleToLibrary googleToLibraryHelper = new GoogleToLibrary();
             Book libraryBook = googleToLibraryHelper.ConvertGoogleBookResultToLibraryBook(googleBook);
+            libraryBook.User = user;
             databaseContext.Books.Add(libraryBook);
+            databaseContext.Attach(user).State = EntityState.Modified;
             var numberOfInserts = databaseContext.SaveChanges();
             return numberOfInserts > 0 ? true : false;
         }
@@ -125,6 +129,17 @@ namespace HomeLibraryManager.Database
                 return true;
             }
             return false;
+        }
+        #endregion
+        #region Login
+        public IEnumerable<User> GetUsers()
+        {
+            return databaseContext.Users;
+        }
+        public User TryLogin(LoginCredentials loginCredentials)
+        {
+            var user = GetUsers().Where(x => x.Username == loginCredentials.Username && x.Password == loginCredentials.Password).FirstOrDefault();
+            return user;
         }
         #endregion
 

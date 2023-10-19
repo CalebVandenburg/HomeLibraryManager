@@ -30,17 +30,25 @@ namespace HomeLibraryManager.Pages.Google
             var partialData = Partial("Partials/_GoogleBooksList", books);
             return partialData;
         }
-        public ContentResult OnPostAddBookAsync([FromBody] string bookID)
+        public ActionResult OnPostAddBookAsync([FromBody] string bookID)
         {
-            var googleBook = googleBooksManager.GetBookByID(bookID).Result;
-            var added = bookRepository.AddGoogleBookResultToLibrary(googleBook);
-            if(added == true)
+            if (HttpContext.Session.GetInt32("userId") != null)
             {
-                return new ContentResult { Content = "Successfully added book to library.", ContentType = "application/json", StatusCode = 200 };
+
+                var googleBook = googleBooksManager.GetBookByID(bookID).Result;
+                var added = bookRepository.AddGoogleBookResultToLibrary(googleBook, (int)HttpContext.Session.GetInt32("userId"));
+                if (added == true)
+                {
+                    return new ContentResult { Content = "Successfully added book to library.", ContentType = "application/json", StatusCode = 200 };
+                }
+                else
+                {
+                    return new ContentResult { Content = "Failed to add book to library.", ContentType = "application/json", StatusCode = 100 };
+                }
             }
             else
             {
-                return new ContentResult { Content = "Failed to add book to library.", ContentType = "application/json", StatusCode = 100 };
+                return Redirect("/");
             }
         }
     }

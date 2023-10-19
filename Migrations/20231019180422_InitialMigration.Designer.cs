@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeLibraryManager.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220704205450_InitialMigration")]
+    [Migration("20231019180422_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,12 @@ namespace HomeLibraryManager.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("BookId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Books");
                 });
@@ -95,7 +100,6 @@ namespace HomeLibraryManager.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -107,6 +111,38 @@ namespace HomeLibraryManager.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("HomeLibraryManager.Database.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Password")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("HomeLibraryManager.Database.Book", b =>
+                {
+                    b.HasOne("HomeLibraryManager.Database.User", "User")
+                        .WithMany("Books")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("HomeLibraryManager.Database.Review", b =>
@@ -123,6 +159,11 @@ namespace HomeLibraryManager.Migrations
             modelBuilder.Entity("HomeLibraryManager.Database.Book", b =>
                 {
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("HomeLibraryManager.Database.User", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

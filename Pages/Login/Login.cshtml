@@ -1,0 +1,10 @@
+﻿@page
+@model HomeLibraryManager.Pages.Login.LoginModel
+@{
+}
+<h1>Login</h1>
+<form method="post">
+    <span><label for="Username">Username: </label><input value="" class="form-control" id="Username" name="Username" required="required" /></span>
+    <span><label for="Password">Password: </label><input type="password" value="" class="form-control" id="Password" name="Password" required="required" /></span>
+    <span><input asp-page-handler="Login" type="submit" value="Login" class="btn btn-success" name="" /></span>
+</form>

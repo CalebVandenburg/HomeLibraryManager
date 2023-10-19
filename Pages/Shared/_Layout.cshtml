@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Http.Extensions;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var user = HttpContextAccessor.HttpContext?.Session.GetInt32("userId");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -44,7 +50,16 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            @if (user != null || (HttpContextAccessor.HttpContext != null && HttpContextAccessor.HttpContext.Request.GetDisplayUrl().ToUpper().Contains("LOGIN")))
+            {
+
+                @RenderBody()
+            }
+            else
+            {
+                IgnoreBody();
+                <h1>Access Denied. Please <a href="/Login">Login</a></h1>
+            }
         </main>
     </div>
 

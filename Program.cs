@@ -13,17 +13,24 @@ builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
     options.Conventions.AddPageRoute("/Library/Books", "/Books");
     options.Conventions.AddPageRoute("/Google/Search", "/Search");
     options.Conventions.AddPageRoute("/Reviews/Reviews", "/Reviews");
+    options.Conventions.AddPageRoute("/Login/Login", "/Login");
 });
+builder.Services.AddDistributedMemoryCache();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10000);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 //ensure database is created and then add to services
 using (var context = new DatabaseContext())
 {
-    context.Database.Migrate();
     builder.Services.AddSingleton<BookRepository>();
 }
 builder.Services.AddSingleton<GoogleBooksManager>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -38,7 +45,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.UseSession();
 app.MapRazorPages();
 
 app.Run();

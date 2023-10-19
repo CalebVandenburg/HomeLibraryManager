@@ -180,7 +180,7 @@ html body header nav .dropdown-menu a.dropdown-item {
 html body header nav .dropdown-menu a.dropdown-item:not(:first-of-type) {
   border-top: 1px solid lightgrey;
 }
-html body h1, html body h2, html body h3, html body h4, html body h5, html body h6, html body p, html body span, html body button, html body input.btn, html body header nav.navbar a, html body p a, html body li {
+html body h1, html body h2, html body h3, html body h4, html body h5, html body h6, html body p, html body span, html body button, html body input.btn, html body header nav.navbar a, html body p a, html body li, html body .container h1 a {
   color: rgb(235, 235, 235);
 }
 html body input.btn.btn-danger, html body a.btn.btn-danger {
