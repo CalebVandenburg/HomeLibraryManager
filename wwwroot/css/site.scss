@@ -211,6 +211,17 @@ html {
                         }
                     }
                 }
+
+                #loggedInAs {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    a {
+                        font-weight: bold;
+                    }
+                    &:hover {
+                        color: grey;
+                    }
+                }
             }
         }
 

@@ -15,8 +15,10 @@ namespace HomeLibraryManager.Migrations
                     UserId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    Password = table.Column<double>(type: "REAL", nullable: false)
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +32,7 @@ namespace HomeLibraryManager.Migrations
                     BookId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     GoogleBookId = table.Column<string>(type: "TEXT", nullable: true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
                     Publisher = table.Column<string>(type: "TEXT", nullable: true),
                     PrintNumber = table.Column<string>(type: "TEXT", nullable: true),
                     EditionNotes = table.Column<string>(type: "TEXT", nullable: true),
@@ -67,7 +69,7 @@ namespace HomeLibraryManager.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     BookId = table.Column<int>(type: "INTEGER", nullable: false),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Text = table.Column<string>(type: "TEXT", nullable: true),
+                    Text = table.Column<string>(type: "TEXT", nullable: false),
                     Score = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>

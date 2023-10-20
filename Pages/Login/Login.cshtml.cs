@@ -1,5 +1,6 @@
 using HomeLibraryManager.Database;
 using HomeLibraryManager.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -23,6 +24,8 @@ namespace HomeLibraryManager.Pages.Login
             if (user != null)
             {
                 HttpContext?.Session.SetInt32("userId", user.UserId);
+                HttpContext?.Session.SetString("userFirstName", user.FirstName);
+                HttpContext?.Session.SetString("userLastName", user.LastName);
                 return Redirect("/");
             }
             else

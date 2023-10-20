@@ -26,6 +26,7 @@ builder.Services.AddSession(options =>
 //ensure database is created and then add to services
 using (var context = new DatabaseContext())
 {
+    context.Database.EnsureCreated();
     builder.Services.AddSingleton<BookRepository>();
 }
 builder.Services.AddSingleton<GoogleBooksManager>();
