@@ -30,7 +30,7 @@ namespace HomeLibraryManager.Pages.Google
             var partialData = Partial("Partials/_GoogleBooksList", books);
             return partialData;
         }
-        public ActionResult OnPostAddBookAsync([FromBody] string bookID)
+        public async Task<IActionResult> OnPostAddBookAsync([FromBody] string bookID)
         {
             if (HttpContext.Session.GetInt32("userId") != null)
             {

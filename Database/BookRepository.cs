@@ -27,7 +27,7 @@ namespace HomeLibraryManager.Database
         }
         public IEnumerable<Book> GetBooks()
         {
-            return databaseContext.Books;
+            return databaseContext.Books.Include(x=>x.User);
         }
         public Book EditBook(BookEditModel bookEdits)
         {
@@ -80,7 +80,7 @@ namespace HomeLibraryManager.Database
         #region Reviews
         public IEnumerable<Review> GetReviews()
         {
-            return databaseContext.Reviews.Include(x => x.Book);
+            return databaseContext.Reviews.Include(x => x.Book).ThenInclude(x=> x.User);
         }
         public bool CreateReview(Review review)
         {
@@ -135,6 +135,14 @@ namespace HomeLibraryManager.Database
         public IEnumerable<User> GetUsers()
         {
             return databaseContext.Users;
+        }
+        public int CreateUser(User user)
+        {
+            databaseContext.ChangeTracker.Clear();
+            databaseContext.Attach(user).State = EntityState.Added;
+            databaseContext.Users.Add(user);
+            var numberOfInserts = databaseContext.SaveChanges();
+            return numberOfInserts;
         }
         public User TryLogin(LoginCredentials loginCredentials)
         {

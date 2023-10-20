@@ -17,7 +17,7 @@ namespace HomeLibraryManager.Pages.Reviews
         }
         public void OnGet()
         {
-            var reviews = bookRepository.GetReviews().ToList();
+            var reviews = bookRepository.GetReviews().Where(x=>x.Book.User.UserId == HttpContext?.Session.GetInt32("userId")).ToList();
             if (reviews != null && reviews.Count > 0)
             {
                 Reviews = reviews;

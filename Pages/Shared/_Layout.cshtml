@@ -54,13 +54,16 @@
                             <li class="nav-item" id="loginLink">
                                 <a class="nav-link " href="/Login">Login</a>
                             </li>
+                            <li class="nav-item" id="loginLink">
+                                <a class="nav-link " href="/CreateUser">Create User</a>
+                            </li>
                         }
                     </ul>
                 </div>
                 @if (user != null)
                 {
                     <div class="" id="loggedInAs">
-                        <span>Logged In As:&nbsp;</span><a class="nav-link " href="/Login">@HttpContextAccessor.HttpContext?.Session.GetString("userFirstName") @HttpContextAccessor.HttpContext?.Session.GetString("userLastName")</a>
+                        <span>Logged In As:&nbsp;</span><a class="nav-link " href="/Login">@HttpContextAccessor.HttpContext?.Session.GetString("userFirstName") @HttpContextAccessor.HttpContext?.Session.GetString("userLastName")</a><span>&nbsp;|&nbsp;</span><a class="nav-link " href="/Logout">Logout</a>
                     </div>
                 }
             </div>
@@ -68,7 +71,16 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @if (user != null || (HttpContextAccessor.HttpContext != null && HttpContextAccessor.HttpContext.Request.GetDisplayUrl().ToUpper().Contains("LOGIN")))
+            @if (
+                user != null || 
+                (HttpContextAccessor.HttpContext != null && 
+                    (
+                        HttpContextAccessor.HttpContext.Request.GetDisplayUrl().ToUpper().Contains("LOGIN") ||
+                        HttpContextAccessor.HttpContext.Request.GetDisplayUrl().ToUpper().Contains("LOGOUT") ||
+                        HttpContextAccessor.HttpContext.Request.GetDisplayUrl().ToUpper().Contains("CREATEUSER")
+                    )       
+                )
+            )
             {
 
                 @RenderBody()

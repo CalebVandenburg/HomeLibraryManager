@@ -7,34 +7,31 @@ using HomeLibraryManager.Helpers;
 
 namespace HomeLibraryManager.Pages.Login
 {
-    public class LoginModel : PageModel
+    public class CreateUserModel : PageModel
     {
         [BindProperty]
-        public LoginCredentials LoginCredentials { get; set; } = default!;
+        public User User { get; set; } = default!;
         private readonly BookRepository bookRepository;
-        public LoginModel(BookRepository bookRepository)
+        public CreateUserModel(BookRepository bookRepository)
         {
             this.bookRepository = bookRepository;
         }
         public void OnGet()
         {
         }// To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostLoginAsync([FromForm] LoginCredentials loginCredentials)
+        public async Task<IActionResult> OnPostCreateUserAsync([FromForm] User userCreateInput)
         {
             //at this point i need to hash the users inpout to see if it matches what is stored since that should be stored hashed
-            loginCredentials.Password = UserDataEncryption.EncryptPassword(loginCredentials.Password);
-
-            var user = bookRepository.TryLogin(loginCredentials);
-            if (user != null)
+            userCreateInput.Password = UserDataEncryption.EncryptPassword(userCreateInput.Password);
+            int user = bookRepository.CreateUser(userCreateInput);
+            if(user > 0)
             {
-                HttpContext?.Session.SetInt32("userId", user.UserId);
-                HttpContext?.Session.SetString("userFirstName", user.FirstName);
-                HttpContext?.Session.SetString("userLastName", user.LastName);
                 return Redirect("/");
             }
             else
             {
-                return Redirect("/");
+
+                return new ContentResult { Content = "Failed to add book to library.", ContentType = "application/json", StatusCode = 100 };
             }
         }
     }

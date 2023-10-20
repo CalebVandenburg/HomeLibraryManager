@@ -14,6 +14,8 @@ builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
     options.Conventions.AddPageRoute("/Google/Search", "/Search");
     options.Conventions.AddPageRoute("/Reviews/Reviews", "/Reviews");
     options.Conventions.AddPageRoute("/Login/Login", "/Login");
+    options.Conventions.AddPageRoute("/Login/Logout", "/Logout");
+    options.Conventions.AddPageRoute("/Login/CreateUser", "/CreateUser");
 });
 builder.Services.AddDistributedMemoryCache();
 

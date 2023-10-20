@@ -30,7 +30,7 @@ namespace HomeLibraryManager.Pages.Library
                 return NotFound();
             }
 
-            var book = bookRepository.GetBooks().Where(x=>x.BookId == id).FirstOrDefault();
+            var book = bookRepository.GetBooks().Where(x=>x.BookId == id && x.User.UserId == HttpContext?.Session.GetInt32("userId")).FirstOrDefault();
             if (book == null)
             {
                 return NotFound();

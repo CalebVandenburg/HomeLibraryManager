@@ -29,7 +29,7 @@ namespace HomeLibraryManager.Pages.Reviews
                 return NotFound();
             }
 
-            var review = bookRepository.GetReviews().Where(x => x.ReviewId == id).FirstOrDefault();
+            var review = bookRepository.GetReviews().Where(x => x.ReviewId == id && x.Book.User.UserId == HttpContext?.Session.GetInt32("userId")).FirstOrDefault();
             if (review == null)
             {
                 return NotFound();

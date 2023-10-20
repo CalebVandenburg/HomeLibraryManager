@@ -24,7 +24,7 @@ namespace HomeLibraryManager.Pages.Library
 
         public void OnGet()
         {
-            var books = bookRepository.GetBooks().ToList();
+            var books = bookRepository.GetBooks().Where(x=>x.User.UserId == HttpContext?.Session.GetInt32("userId")).ToList();
             if (books != null && books.Count > 0)
             {
                 Books = books;
