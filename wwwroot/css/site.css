@@ -101,6 +101,7 @@ table tbody tr:nth-child(odd) .linkingTD:hover {
 }
 #bookDetailContainer #description, #reviewDetailContainer #description {
   margin-top: 3rem;
+  color: lightgrey;
 }
 #bookDetailContainer #left, #reviewDetailContainer #left {
   width: 23%;
