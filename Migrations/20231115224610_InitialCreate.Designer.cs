@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeLibraryManager.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231020161141_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20231115224610_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,6 +134,9 @@ namespace HomeLibraryManager.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("ShelfFormatAsCard")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Username")
                         .IsRequired()

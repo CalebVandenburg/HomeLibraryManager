@@ -74,22 +74,48 @@
   width: 20px;
 }
 
-table {
+.shelfButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.shelfButtons .shelfFormatToggleContainer {
+  display: flex;
+  border-radius: 1rem;
+  border-color: !important;
+}
+.shelfButtons .shelfFormatToggleContainer .btn:not([data-active=true]) {
+  background-color: grey !important;
+}
+.shelfButtons .shelfFormatToggleContainer .cardToggle.btn {
+  background-color: lightgray;
+  color: black;
+  border-radius: 0.25rem 0 0 0.25rem;
+  border: 1px solid black;
+}
+.shelfButtons .shelfFormatToggleContainer .tableToggle.btn {
+  background-color: lightgray;
+  color: black;
+  border-radius: 0 0.25rem 0.25rem 0;
+  border: 1px solid black;
+}
+
+table#bookListTable {
   border-color: rgb(95, 99, 104) !important;
 }
-table thead tr {
+table#bookListTable thead tr {
   background-color: grey;
 }
-table tbody tr:nth-child(even) {
+table#bookListTable tbody tr:nth-child(even) {
   background-color: grey;
 }
-table tbody tr:nth-child(even) .linkingTD:hover {
+table#bookListTable tbody tr:nth-child(even) .linkingTD:hover {
   background-color: lightgrey;
 }
-table tbody tr:nth-child(odd) {
+table#bookListTable tbody tr:nth-child(odd) {
   background-color: lightgrey;
 }
-table tbody tr:nth-child(odd) .linkingTD:hover {
+table#bookListTable tbody tr:nth-child(odd) .linkingTD:hover {
   background-color: grey;
 }
 

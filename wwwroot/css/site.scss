@@ -81,9 +81,39 @@
 .libraryListBookThumbnail {
     width: 20px;
 }
-table {
+.shelfButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+
+    .shelfFormatToggleContainer {
+        display: flex;
+        border-radius: 1rem;
+        border-color: !important;
+
+        .btn:not([data-active="true"]) {
+            background-color: grey !important;
+        }
+
+        .cardToggle.btn {
+            background-color: lightgray;
+            color: black;
+            border-radius: 0.25rem 0 0 0.25rem;
+            border: 1px solid black;
+        }
+
+        .tableToggle.btn {
+            background-color: lightgray;
+            color: black;
+            border-radius: 0 0.25rem 0.25rem 0;
+            border: 1px solid black;
+        }
+    }
+}
+table#bookListTable {
     //override bootstrap
     border-color: rgb(95,99,104) !important;
+
 
     thead {
         tr {

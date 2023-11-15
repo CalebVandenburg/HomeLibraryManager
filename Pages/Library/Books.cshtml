@@ -2,15 +2,28 @@
 @model HomeLibraryManager.Pages.Library.BooksModel
 
 @{
-    ViewData["Title"] = "Library";
+    ViewData["Title"] = "My Shelf";
 }
 
-<h1>Library</h1>
+<h1>My Shelf</h1>
+<div class="shelfButtons">
 
-<p>
     <input type="button" class="btn btn-danger" onclick="DeleteSelected()" value="Delete Selected" id="deleteSelectedButton" />
-</p>
-<table class="table" id="bookListTable">
+    <div class="shelfFormatToggleContainer">
+        <button type="button" class="btn cardToggle" onclick="ToggleViewFormat(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid-3x3-gap-fill" viewBox="0 0 16 16">
+                <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z" />
+            </svg>
+        </button>
+
+        <button type="button" class="btn tableToggle " data-active="true" onclick="ToggleViewFormat(this)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z" />
+            </svg>
+        </button>
+    </div>
+</div>
+<table class="table" id="bookListTable" data-format="card">
     <thead>
         <tr>
             <th><input id="selectAllCheckbox" onchange="ToggleSelected(this)" type="checkbox"></th>
@@ -42,7 +55,7 @@
         {
             <tr>
                 <td><input class="singleCheckbox" onchange="ToggleSelectAll()"  type="checkbox" data-bookid="@item.BookId"></td>
-                <td>
+                    <td class="libraryListBookThumbnailTD">
                     <img class="libraryListBookThumbnail" src="@Html.ValueFor(modelItem => item.SmallThumbnail)">
                 </td>
                 <td  class="linkingTD" onclick="location.href='/Library/Book?id=@item.BookId'">
@@ -70,6 +83,18 @@
     </tbody>
 </table>
 <script>
+    function ToggleViewFormat(button) {
+        if (!button.dataset.active == true) {
+            console.log("selected different state");
+            if(button.nextElementSibling != undefined) {
+                console.log("clicked on card");
+            }
+            else {
+
+                console.log("clicked on table");
+            }
+        }
+    }
      function ToggleSelected(checkbox) {
 
          var checkedBooks = document.getElementsByClassName('singleCheckbox');

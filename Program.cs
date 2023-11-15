@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
 {
     options.Conventions.AddPageRoute("/Library/Home", "");
-    options.Conventions.AddPageRoute("/Library/Books", "/Books");
+    options.Conventions.AddPageRoute("/Library/Books", "/Shelf");
     options.Conventions.AddPageRoute("/Google/Search", "/Search");
     options.Conventions.AddPageRoute("/Reviews/Reviews", "/Reviews");
     options.Conventions.AddPageRoute("/Login/Login", "/Login");
@@ -28,7 +28,6 @@ builder.Services.AddSession(options =>
 //ensure database is created and then add to services
 using (var context = new DatabaseContext())
 {
-    context.Database.EnsureCreated();
     builder.Services.AddSingleton<BookRepository>();
 }
 builder.Services.AddSingleton<GoogleBooksManager>();
